@@ -1,24 +1,32 @@
 <?php
 
-//LLamando a los Campos
-$nombre = $_POST['nombre'];
-$apellido = $_POST['apellido'];
-$correo = $_POST['email'];
-$mensaje = $_POST['mensaje'];
+$para = "mauro.mas.1997@hotmail.com";
 
+$titulo = 'Contacto';
 
-//Datos para el Correo
-$destinatario = "mauro.mas.1997@gmail.com";
-$asunto = "Contacto";
+$mensaje = '
+<html>
+<head>
+    <title>Contacto</title>
+</head>
+<body>
+    <p>Nombre: '$_POST["nombre"].'</P>
+    <p>Apellido: '$_POST["apellido"].'</P>
+    <p>E-mail: '$_POST["email"].'</P>
+    <p>Consulta: '$_POST["mensaje"].'</P>
 
-$carta = "De: $nombre \n";
-$carta .= "Correo: $correo \n";
-$carta .= "Consulta: $mensaje";
+</body>
+</html>
+';
 
+$mensaje = wordwrap($mensaje,70);
 
-//Enviando Correo
-mail($destinatario, $asunto, $carta);
+$cabeceras = 'MIME-Version: 1.0' . "\r\n";
+$cabeceras .= 'Content-type: text/html; charset=utf-8' . "\r\n";
 
+$cabeceras .= 'From: wireframe <mauro.mas.1997@gmail.com'> . "\r\n";
+
+mail($para, $titulo, $mensaje, $cabeceras);
 
 
 
